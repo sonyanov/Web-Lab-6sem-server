@@ -19,7 +19,23 @@ const Schema = new mongoose.Schema({
 const city = mongoose.model('cities', Schema);
 
 class Dao {
-	create(response) {
+
+	contain(response){
+		const data = {
+			coord: {
+				latitude: response.coord.lat,
+				lontitude: response.coord.lon
+			}
+		}
+
+		let result = await city.findOne(data);
+		return result !== null
+	}
+
+	async create(response) {
+
+		if(await this.contain(response)) return 
+
 		city.create({
 			name: response.name,
 			coord: {

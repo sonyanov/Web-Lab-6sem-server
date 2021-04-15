@@ -122,9 +122,18 @@ async function getDatabyCity(city){
 
 //Добавление избранных городов
 async function addFavorites() {
-  const city = document.querySelector('.add-favorite-location input').value;
-  const response = await( await fetch(serverUrl + favorites + `?q=${city}`, { method: 'POST' })).json();
-  displayWeatherByCity(response);
+  const city = document.querySelector('.add-favorite-location input').value.trim();
+  try {
+        const response = await( await fetch(serverUrl + favorites + `?q=${city}`, {
+          method: 'POST' 
+        })).json();
+        console.log(response.name);
+        if(response.name !== undefined){
+           displayWeatherByCity(response);
+        }
+  }catch (err) {
+    window.alert("City not found")
+  } 
 }
 
 //Заставка на загрузку данных
