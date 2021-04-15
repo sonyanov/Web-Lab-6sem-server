@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>LAB 1</title>
+	<script src="https://kit.fontawesome.com/3414c82043.js" crossorigin="anonymous"></script>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+	<meta name="viewport" content="width=device-width" />
+</head>
+<body>
+<header class="header">
+	<h2>Погода здесь</h2>
+	<button><span>Обновить геолокацию</span><i class="fas fa-sync-alt"></i></button>
+</header>
+<main>
+	<section class="loader" id="loader">
+		<img src="png/loader.gif">
+		<h1>Загрузка данных</h1>
+	</section>
+	<section class="location-weather" id="location-weather">
+		<div class="location-info-city">
+			<h1></h1>
+			<div class="temperature-picture_weather">
+				<div class="picture_weather">
+					<img></img>
+				</div>
+				<p></p>
+			</div>
+		</div>
+		<ul class="location-info-weather">
+			<li class="wind">
+				<h4>Ветер</h4>
+				<p></p>
+			</li>
+			<li class="description">
+				<h4>Облачность</h4>
+				<p></p>
+			</li>
+			<li class="pressure">
+				<h4>Давление</h4>
+				<p></p>
+			</li>
+			<li class="humidity">
+				<h4>Влажность</h4>
+				<p></p>
+			</li>
+			<li class="coords">
+				<h4>Координаты</h4>
+				<p></p>
+			</li>
+		</ul>
+	</section>
+	<section class="favorites-location">
+		<div class="title-favorites-location">
+			<h2>Избранное</h2>
+			<div class="add-favorite-location">
+				<input class="input" type="text" name="city" value="" placeholder="Добавить новый город">
+				<button><i class="fas fa-plus"></i></button>
+			</div>
+		</div>
+		<div class="grid-favorites-location">
+			<template class="location-info-weather-grid" id="location-info-weather-grid">
+				
+			<div class="clone" id="clone">
+				<div class="loader-city" id="loader-city">
+					<img src="png/loader.gif">
+					<h1>Загрузка данных</h1>
+				</div>
+					<div class="location-info-favorites-city">
+						<h3></h3>
+						<p></p>
+						<div class="picture_weather-favorites">
+							<img></img>
+						</div>
+						<button><i class="fas fa-times"></i></button>
+					</div>
+					<ul class="ul-fav-city">
+						<li class="favcity_wind">
+							<h4>Ветер</h4>
+							<p></p>
+						</li>
+						<li class="favcity_description">
+							<h4>Облачность</h4>
+							<p></p>
+						</li>
+						<li class="favcity_pressure">
+							<h4>Давление</h4>
+							<p></p>
+						</li>
+						<li class="favcity_humidity">
+							<h4>Влажность</h4>
+							<p></p>
+						</li>
+						<li class="favcity_coords">
+							<h4>Координаты</h4>
+							<p></p>
+						</li>
+					</ul>
+				</div>
+			</template>
+		</div>
+	</section>
+</main>
+</body>
+<script type="text/javascript" src="index.js"></script>
+</html>

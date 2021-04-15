@@ -1,0 +1,310 @@
+body{
+	margin: 30px auto 0px;
+	width: 950px;
+}
+
+h1{
+	color: #748287;
+	font-size: 31px;
+	font-family: 'Roboto', sans-serif;
+}
+
+h2{
+	color: #889295;
+	font-size: 30px;
+	font-weight: 200;
+	margin: 0;
+}
+
+h3{
+	color: #748287;
+	font-size: 24px;
+	font-family: 'Roboto', sans-serif;
+	margin:0;
+}
+
+ul{
+	padding: 0;
+}
+
+h4{
+	margin: 0;
+	margin-top: 5px;
+	margin-right: 10px;
+	margin-bottom: 5px;
+}
+
+p{
+	margin: 0;
+	margin-top: 5px;
+	text-align: right;
+	margin-bottom: 5px;
+}
+
+input{
+	background-color: #F1F1F1;
+	color: #A5ABAE;
+	border-radius: 3px;
+	border: none;
+	padding-left: 10px;
+	width: 200px;
+	height: 38px;
+}
+
+ .location-info-weather li{
+	background-color:#A7AFB1;
+	padding-left: 10px;
+	padding-right: 10px;
+	color: white;
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 7px;
+}
+
+.location-info-weather {
+	width: 450px;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 500;
+	margin-top: 10px;
+	color: white;
+}
+
+
+.header{
+	display: flex;
+	align-items: center;
+}
+
+.header button{
+	color:  #939EA5;
+	border: none;
+	border-radius: 5px;
+	width: 220px;
+	height: 40px;
+	background-color:#C9D2D7;
+	margin-left: 210px;
+}
+
+.fa-sync-alt{
+	display: none;
+}
+
+.location-weather{
+	display: none;
+	grid-template-columns:  450px 450px;
+	column-gap: 50px;
+}
+
+.location-info-city{
+	width: 500px;
+}
+
+.temperature-picture_weather{
+	display: flex;
+}
+
+.picture_weather img{
+	width: 100px;
+	
+	margin-right: 100px;
+}
+
+.temperature-picture_weather p{
+	font-family: 'Roboto', sans-serif;
+	color: #748287;
+	font-size: 90px;
+	margin: 0;
+}
+
+.favorites-location{
+	margin-top: 20px;
+}
+
+.title-favorites-location{
+	margin-bottom: 20px;
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+}
+
+
+.add-favorite-location{
+	display: flex;
+	justify-content: space-between;
+}
+
+.favorites-location button{
+	width:40px;
+	height: 40px;
+	border-radius: 50%;
+	background: #708288;
+	border: none;
+	color: white;
+	font-size: 20px;
+
+}
+.title-favorites-location button{
+	margin-left: 10px;
+}
+.grid-favorites-location{
+	display: grid;
+	grid-template-columns:  450px 450px;
+	column-gap: 50px;
+}
+
+
+.location-info-favorites-city{
+	display: flex;
+	justify-content: space-between;
+}
+
+.location-info-favorites-city p{
+	font-family: 'Roboto', sans-serif;
+	color: #748287;
+	font-size: 24px;
+	margin: 0;
+	margin-right: 30px;
+}
+
+.location-info-weather-grid{
+	margin-top: 10px;
+}
+
+
+.grid-favorites-location ul{
+	font-family: 'Roboto', sans-serif;
+	font-weight: 500;
+	margin-top: 16px;
+	color: white;
+
+}
+
+.grid-favorites-location li{
+	background-color:#A7AFB1;
+	padding-left: 10px;
+	padding-right: 10px;
+	color: white;
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 7px;
+}
+
+.picture_weather-favorites img{
+	width: 30px;
+	height: 30px;
+	
+}
+
+.loader{
+	display: flex;
+	align-items: center;
+	height: 206px;
+}
+
+.loader img{
+	height: 50px;
+	margin-right: 20px;
+}
+
+.loader-city{
+	display: flex;
+	align-items: center;
+}
+
+.loader-city img{
+	height: 50px;
+	margin-right: 20px;
+}
+
+@media  (max-width: 970px){
+
+	body{
+		width: 450px;
+	}
+
+	.header{
+		justify-content: space-between;
+	}
+
+	.location-info-city{
+		width: 450px;
+	}
+
+	.location-weather{
+		grid-template-columns:  450px;
+	}
+
+	.header span{
+		display: none;
+	}
+
+	.header button{
+		margin-left: 0;
+		width: 90px;
+	}
+
+	.fa-sync-alt{
+        display: block;
+        font-size: 26px;
+    }
+
+	.grid-favorites-location{
+		grid-template-columns:  450px;
+	}
+
+	.loader{
+		height: 403px;
+	}
+
+
+}
+
+@media (max-width: 520px){
+
+	body{
+		width: 300px;
+	}
+
+	h2{
+		margin-bottom: 10px;
+	}
+
+	input{
+		margin-right: 37px;
+	}
+
+	.location-info-weather{
+		width: 300px;
+	}
+
+	.location-info-city{
+		width: 300px;
+	}
+
+	.grid-favorites-location{
+		
+		grid-template-columns:  300px;
+	}
+
+	.header button{
+		width: 90px;
+		margin-left: 43px;
+	}
+
+	.picture_weather img{
+		margin-right: 30px;
+	}
+
+	.picture_weather-favorites{
+		margin-right: 25px;
+	}
+
+	.title-favorites-location{
+		display: block;
+	}
+
+	.title-favorites-location div:last-child{
+		margin-left: 0px;
+	}
+
+}

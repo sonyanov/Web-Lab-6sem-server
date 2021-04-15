@@ -7,6 +7,7 @@ const favorites = '/favorites'
 weather.temperature = {
   unit: 'celsius',
 };
+
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
@@ -29,7 +30,7 @@ function displayWeatheByCoords(data) {
 
   windElement.innerHTML = data.wind;
 
-  //desc.innerHTML = data.description.charAt(0).toUpperCase() + data.description.slice(1);
+  desc.innerHTML = data.description.charAt(0).toUpperCase() + data.description.slice(1);
 
   presElement.innerHTML = data.pressure;
   humElement.innerHTML = data.humidity;
@@ -38,7 +39,7 @@ function displayWeatheByCoords(data) {
 }
 
 //Добавление и вывод информации о избанном городе
-function displayWeatherByCity() {
+async function displayWeatherByCity(data) {
   const template = document.querySelector('#location-info-weather-grid');
 
   const favcityElement = template.content.querySelector('.location-info-favorites-city h3');
@@ -50,18 +51,18 @@ function displayWeatherByCity() {
   const favhumElement = template.content.querySelector('.favcity_humidity p');
   const favcoordElement = template.content.querySelector('.favcity_coords p');
 
-  favcityElement.innerHTML = weather.city;
-  faviconElement.innerHTML = `<img src="png/${weather.iconId}.png"/>`;
-  favtempElement.innerHTML = `${weather.temperature.value}°C`;
+  favcityElement.innerHTML = data.name;
+  faviconElement.innerHTML = `<img src="png/${data.icon}.png"/>`;
+  favtempElement.innerHTML = data.temp;
 
-  favwindElement.innerHTML = `${weather.speed} m/s, ${weather.deg}`;
+  favwindElement.innerHTML = data.wind;
 
-  favdesc.innerHTML = weather.description.charAt(0).toUpperCase() + weather.description.slice(1);
+  favdesc.innerHTML = data.description.charAt(0).toUpperCase() + data.description.slice(1);
 
-  favpresElement.innerHTML = `${weather.pressure} hpa`;
-  favhumElement.innerHTML = `${weather.humidity} %`;
+  favpresElement.innerHTML = data.pressure;
+  favhumElement.innerHTML = data.humidity;
 
-  favcoordElement.innerHTML = `[${weather.lat.toFixed(2)};${weather.lon.toFixed(2)}]`;
+  favcoordElement.innerHTML = `[${data.coord.lat.toFixed(2)};${data.coord.lon.toFixed(2)}]`;
 
   const clone = template.content.querySelector('.clone').cloneNode(true);
   const gridLocation = document.querySelector('.grid-favorites-location');
@@ -76,15 +77,17 @@ function displayWeatherByCity() {
   ul.style.display = 'none';
   div.style.display ='none';
   
-  sleep(1000).then(() => {
+  sleep(500).then(() => {
     ul.style.display = 'block'
     div.style.display ='flex';
     loaderGrid.style.display = 'none';
   })
 
-  clone.querySelector('.location-info-favorites-city button').onclick = () => {
+  clone.querySelector('.location-info-favorites-city button').onclick = async () => {
     
-    localStorage.removeItem(clone.querySelector('.location-info-favorites-city h3').innerHTML);
+    await fetch(serverUrl + favorites + `?q=${clone.querySelector('.location-info-favorites-city h3').innerHTML}`, {
+      method: 'DELETE'
+    });
     gridLocation.removeChild(clone);
   };
 }
@@ -107,37 +110,22 @@ async function getResponseByCity(city){
 
 //Получение данных по координатам
 async function getDatabyCoords(latitude, longitude){
-  const data = await getResponseByCoords(latitude, longitude);
-  console.log(data);
-  // if (data.cod == "404") window.alert(data.message);
-  // else await getWeather(data);
+  const data = await getResponseByCoords(latitude, longitude);  
   displayWeatheByCoords(data);
 }
 
 //Получение данных по городу
 async function getDatabyCity(city){
   const data = await getResponseByCity(city);
-
-  console.log(data);
-
-  // if(data.id != localStorage.getItem(data.name) ){
-  //   if (data.cod == "404") window.alert(data.message);
-  //   else await getWeather(data);
-
-  //   displayWeatherByCity();
-  // }
-  // else if(data.cod == "404") window.alert(data.message);
-  //     else window.alert("Такой город уже указан")
+  displayWeatherByCity(data);
 }
 
-// Добавление избранных городов
-// function addFavorites() {
-//   const city = document.querySelector('.add-favorite-location input').value;
-//   const result = await (await fetch(serverUrl + favorites + `?q=${city}`, {
-//           method: 'POST'
-//         })).json();
-//   getDatabyCity(result);
-// }
+//Добавление избранных городов
+async function addFavorites() {
+  const city = document.querySelector('.add-favorite-location input').value;
+  const response = await( await fetch(serverUrl + favorites + `?q=${city}`, { method: 'POST' })).json();
+  displayWeatherByCity(response);
+}
 
 //Заставка на загрузку данных
 function loadingCity() {
@@ -174,35 +162,32 @@ async function showError() {
 
 // Добавление часто встречаемыхь городов
 async function defaultAdd() {
-  const defCity = ['Moscow', 'Madrid', 'London', 'New York'];
-  const defKey = ['524901', '3117735', '2643743', '5128581']
 
-  const data = await (await fetch(serverURL + favorites, {
+  const data = await( await fetch(serverUrl + favorites, {
       method: 'GET'
     })).json();
 
   for (let i = 0; i < data.length; i+=1){
-      getWeather(data[i]);
-      await displayWeatherByCity();
+      await displayWeatherByCity(data[i]);
   }
 }
 
-// function pressEnter() {
+function pressEnter() {
 
-//   document.querySelector('.input').addEventListener('keypress',
-//       function (e) {
-//         if (e.key === 'Enter' && document.querySelector('.input').value !== "") {
-//           addFavorites();
-//         }
-//       });
-// }
+  document.querySelector('.input').addEventListener('keypress',
+      function (e) {
+        if (e.key === 'Enter' && document.querySelector('.input').value !== "") {
+          addFavorites();
+        }
+      });
+}
 
 async function main(){
-  //defaultAdd();
+  defaultAdd();
   navigator.geolocation.getCurrentPosition(setPosition, showError);
-  //pressEnter();
+  pressEnter();
 
-  //document.querySelector('.add-favorite-location button').onclick = addFavorites;
+  document.querySelector('.add-favorite-location button').onclick = addFavorites;
   document.querySelector('.header button').onclick = () => {
     loading();
     navigator.geolocation.getCurrentPosition(setPosition, showError);
