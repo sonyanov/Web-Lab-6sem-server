@@ -1,5 +1,5 @@
 ## Github pages
-https://sonyanov.github.io/Web_Lab_6sem/
+https://sonyanov.github.io/Web_Lab_6sem-server/
 
 ### Лабораторная 3
 Необходимо доработать лабораторную работу №2, добавив реализацию серверной части приложения. Серверная часть реализуется на NodeJS, допустимо использовать фреймворки вроде Express или Sails.
