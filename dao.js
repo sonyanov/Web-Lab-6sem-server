@@ -29,6 +29,7 @@ class Dao {
 		}
 
 		let result = await city.findOne(data);
+		console.log(result)
 		return result !== null
 	}
 
