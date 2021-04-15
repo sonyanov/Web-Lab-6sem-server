@@ -20,7 +20,7 @@ const city = mongoose.model('cities', Schema);
 
 class Dao {
 
-	contain(response){
+	async contain(response){
 		const data = {
 			coord: {
 				latitude: response.coord.lat,
