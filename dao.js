@@ -34,7 +34,7 @@ class Dao {
 	async create(response) {
 
 		if(await this.contain(response)) 
-			return 
+			return 0
 		else{
 			city.create({
 				name: response.name,
@@ -43,6 +43,7 @@ class Dao {
 					lontitude: response.coord.lon
 				}
 			})
+			return 1
 		}
 		
 	}

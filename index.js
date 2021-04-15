@@ -127,10 +127,10 @@ async function addFavorites() {
         const response = await( await fetch(serverUrl + favorites + `?q=${city}`, {
           method: 'POST' 
         })).json();
-        console.log(response.name);
         if(response.name !== undefined){
            displayWeatherByCity(response);
         }
+        else window.alert("Такой город уже есть")
   }catch (err) {
     window.alert("City not found")
   } 

@@ -39,8 +39,13 @@ router.post('/favorites', async (req, res) => {
 	else {
 		const response = `q=${req.query.q}&appid=`;
 		const apiResponse = await apiRequest.getResponse(response);
-		await dao.create(apiResponse);
-		res.json(apiResponse).status(201);
+		const result = await dao.create(apiResponse);
+		if (result === 1)
+			res.json(apiResponse).status(201);
+		else{
+			apiResponse.name = undefined;
+			res.json(apiResponse)
+		}
 	}
 })
 
