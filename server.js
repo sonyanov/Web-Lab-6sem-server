@@ -14,12 +14,14 @@ async function start () {
 			useUnifiedTopology: true
 		}, console.log("connent"))
 		app.listen(port, () => {
-		console.log('Server started')
+		console.log("Server started")
 		})
 	} catch (e) {
 		console.log(e);
 	}
 }
+
+console.log(process.env.DB_CONNECT)
 start();
 app.use(cors());
 app.use('', weatherRoute);
