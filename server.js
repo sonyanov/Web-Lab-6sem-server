@@ -13,16 +13,16 @@ app.use('', favoritesRoute);
 
 async function start () {
   try {
- 	await mongoose.connect(process.env.DB_CONNECT, {
-	  useNewUrlParser: true,
+  	await mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PAS}@cluster0.4tb7y.mongodb.net/favorites`, {
+      useNewUrlParser: true,
 	  useFindAndModify: false,
 	  useUnifiedTopology: true
-	  }, console.log("connent"))
-	  app.listen(port, () => {
+	}, console.log("connent"))
+	app.listen(port, () => {
 	  console.log("Server started")
-	  })
-	} catch (e) {
-	  console.log(e);
+	})
+  } catch (e) {
+ 	console.log(e);
   }
 }
 
