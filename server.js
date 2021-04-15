@@ -8,7 +8,7 @@ const port = process.env.PORT || 3000;
 
 async function start () {
 	try {
-		await mongoose.connect(process.env.DB_CONNECT, {
+		await mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PAS}@cluster0.4tb7y.mongodb.net/favorites`, {
 			useNewUrlParser: true,
 			useFindAndModify: false,
 			useUnifiedTopology: true
