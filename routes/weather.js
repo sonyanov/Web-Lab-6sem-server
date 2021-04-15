@@ -9,11 +9,10 @@ router.get('/weather/city', async (req, res) => {
 
 	if(!req.query.q)
 		res.status(404);
-	else {\
+	else {
 		const response = `q=${req.query.q}&appid=`;
 		const apiResponse = await apiRequest.getResponse(response);
-		console.log(apiResponse.name)
-		res.json(apiResponse);
+		res.send(apiResponse);
 	}
 })
 

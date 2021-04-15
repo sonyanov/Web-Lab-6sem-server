@@ -3,15 +3,17 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const app = express();
 const weatherRoute = require('./routes/weather');
+require('dotenv').config({ path: '.env' });
+const port = process.env.PORT || 3000;
 
 async function start () {
 	try {
-		await mongoose.connect('mongodb+srv://sonya_nov:stich8614@cluster0.4tb7y.mongodb.net/favorites', {
+		await mongoose.connect(process.env.DB_CONNECT, {
 			useNewUrlParser: true,
 			useFindAndModify: false,
 			useUnifiedTopology: true
 		}, console.log("connent"))
-		app.listen(3000, () => {
+		app.listen(port, () => {
 		console.log('Server started')
 		})
 	} catch (e) {
