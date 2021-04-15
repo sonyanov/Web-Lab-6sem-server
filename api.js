@@ -27,10 +27,11 @@ class Api {
 				lat: data.coord.lat
 			},
 			temp: `${Math.round(data.main.temp)}°C`,
-			pressure: data.main.pressure, 
-			humidity: data.main.humidity,
-			description: data.weather.description,
-			wind: `${data.wind.speed} m/s, ${this.convertDeg(data.wind.deg)}`
+			pressure: `${data.main.pressure} hpa`, 
+			humidity: `${data.main.humidity} %`,
+			description: data.weather[0].description,
+			wind: `${data.wind.speed} m/s, ${this.convertDeg(data.wind.deg)}`,
+			icon: data.weather[0].icon
 		}
 	}
 
