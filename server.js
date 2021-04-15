@@ -20,8 +20,6 @@ async function start () {
 		console.log(e);
 	}
 }
-
-console.log(process.env.DB_CONNECT)
 start();
 app.use(cors());
 app.use('', weatherRoute);

@@ -33,6 +33,11 @@ class Dao {
 		await city.findOneAndRemove({name: cityName});
 	}
 
+	findOne(city) {
+		if(city.findOne({name: city})!= undefined)
+			return false;
+	}
+
 	find() {
 		return city.find({})
 	}
