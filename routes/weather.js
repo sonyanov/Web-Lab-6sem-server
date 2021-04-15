@@ -7,56 +7,25 @@ const apiRequest = new apiClass();
 
 router.get('/weather/city', async (req, res) => {
 
-	if(!req.query.q)
-		res.status(404);
-	else {
-		const response = `q=${req.query.q}&appid=`;
-		const apiResponse = await apiRequest.getResponse(response);
-		res.send(apiResponse);
-	}
+  if(!req.query.q){
+	res.status(404);
+	return
+  }
+
+  const apiResponse = await apiRequest.getResponseByCity(req.query.q);
+  res.send(apiResponse);
+
 })
 
 router.get('/weather/coordinates', async (req, res) => {
-	if(!req.query.lat && !req.query.lon)
-		res.status(404);
-	else {
-		const response = `lat=${req.query.lat}&lon=${req.query.lon}&appid=`;
-		const apiResponse = await apiRequest.getResponse(response);
-		res.json(apiResponse);
-	}
-})
 
-router.get('/favorites', async (req, res) => {
+  if(!req.query.lat || !req.query.lon){
+	res.status(404);
+	return
+  }
 
-	const favorites = await dao.find();
-	const favCity = await apiRequest.getCity(favorites);
-	res.json(favCity).send();
-})
-
-router.post('/favorites', async (req, res) => {
-	if(!req.query.q)
-		res.status(404);
-	else {
-		const response = `q=${req.query.q}&appid=`;
-		const apiResponse = await apiRequest.getResponse(response);
-		const result = await dao.create(apiResponse);
-		if (result === 1)
-			res.json(apiResponse).status(201);
-		else{
-			apiResponse.name = undefined;
-			res.json(apiResponse)
-		}
-	}
-})
-
-router.delete('/favorites', async (req, res) => {
-	if(!req.query.q)
-		res.status(404);
-	else {
-		
-		await dao.remove(req.query.q);
-		res.status(204).send();
-	}
+  const apiResponse = await apiRequest.getResponseByCoord(req.query.lat, req.query.lon);
+  res.json(apiResponse);
 })
 
 module.exports = router;
