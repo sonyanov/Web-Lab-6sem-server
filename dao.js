@@ -6,11 +6,11 @@ const Schema = new mongoose.Schema({
 	},
 	coord: {
 		latitude: {
-			type: String,
+			type: Number,
 			required: true,
 		},
 		lontitude:{
-			type: String,
+			type: Number,
 			required: true,
 		}
 	}
@@ -23,27 +23,28 @@ class Dao {
 	async contain(response){
 		const data = {
 			coord: {
-				latitude: response.coord.lat,
-				lontitude: response.coord.lon
-			}
+					latitude: response.coord.lat,
+					lontitude: response.coord.lon
+				}
 		}
-
 		let result = await city.findOne(data);
-		console.log(result)
 		return result !== null
 	}
 
 	async create(response) {
 
-		if(await this.contain(response)) return 
-
-		city.create({
-			name: response.name,
-			coord: {
-				latitude: response.coord.lat,
-				lontitude: response.coord.lon
-			}
-		})
+		if(await this.contain(response)) 
+			return 
+		else{
+			city.create({
+				name: response.name,
+				coord: {
+					latitude: response.coord.lat,
+					lontitude: response.coord.lon
+				}
+			})
+		}
+		
 	}
 
 	async remove(cityName) {
