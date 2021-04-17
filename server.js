@@ -18,8 +18,12 @@ async function start () {
 	  useFindAndModify: false,
 	  useUnifiedTopology: true
 	}, console.log("connent"))
-	app.listen(port, () => {
-	  console.log("Server started")
+	app.listen(port, (err) => {
+	  if(err){
+	  	console.log("Server failed!");
+	  	return;
+	  }
+	  console.log("Server started");
 	})
   } catch (e) {
  	console.log(e);

@@ -32,7 +32,7 @@ class Dao {
   }
 
   async create(response) {
-  	const result = true
+  	var result = true
 	if(await this.contain(response)){
 	  result = false
 	  return result
