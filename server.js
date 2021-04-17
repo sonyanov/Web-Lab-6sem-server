@@ -13,7 +13,7 @@ app.use('', favoritesRoute);
 
 async function start () {
   try {
-  	await mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PAS}@cluster0.4tb7y.mongodb.net/favorites`, {
+  	await mongoose.connect(`${process.env.DB_CONNECT}`, {
       useNewUrlParser: true,
 	  useFindAndModify: false,
 	  useUnifiedTopology: true
