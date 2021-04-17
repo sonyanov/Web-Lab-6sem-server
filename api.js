@@ -3,8 +3,8 @@ require('dotenv').config({ path: '.env' });
 
 class Api {
   constructor() {
- 	this.key = process.env.KEY;
-	this.pattern = process.env.PATTERN;
+    this.key = process.env.KEY;
+    this.pattern = process.env.PATTERN;
   }
   convertDeg(deg) {
     if (deg <= 21 || deg >= 337) { deg = 'North'; }
@@ -20,37 +20,37 @@ class Api {
   }
 
   convertData(data) {
- 	return {
- 	  name: data.name, 
-	  coord: {
-		lon: data.coord.lon, 
-		lat: data.coord.lat
-	  },
-	  temp: `${Math.round(data.main.temp)}°C`,
-	  pressure: `${data.main.pressure} hpa`, 
-	  humidity: `${data.main.humidity} %`,
-	  description: data.weather[0].description,
-	  wind: `${data.wind.speed} m/s, ${this.convertDeg(data.wind.deg)}`,
-	  icon: data.weather[0].icon
-	}
+    return {
+      name: data.name, 
+      coord: {
+        lon: data.coord.lon, 
+        lat: data.coord.lat
+      },
+      temp: `${Math.round(data.main.temp)}°C`,
+      pressure: `${data.main.pressure} hpa`, 
+      humidity: `${data.main.humidity} %`,
+      description: data.weather[0].description,
+      wind: `${data.wind.speed} m/s, ${this.convertDeg(data.wind.deg)}`,
+      icon: data.weather[0].icon
+    }
   }
 
   async getResponseByCity(response) {
-  	const result = `q=${response}&appid=`;
+    const result = `q=${response}&appid=`;
     const apiResponse = await axios.request(this.pattern + result + this.key + `&units=metric`);
-	return await this.convertData(apiResponse.data);
+    return await this.convertData(apiResponse.data);
   }
 
   async getResponseByCoord(lat, lon) {
-  	const result = `lat=${lat}&lon=${lon}&appid=`;
+    const result = `lat=${lat}&lon=${lon}&appid=`;
     const apiResponse = await axios.request(this.pattern + result + this.key + `&units=metric`);
-	return await this.convertData(apiResponse.data);
+    return await this.convertData(apiResponse.data);
   }
 
   async getCity(city) {
- 	return await Promise.all(city.map(city => {
-	  return this.getResponseByCity(city.name);
-	}));
+    return await Promise.all(city.map(city => {
+      return this.getResponseByCity(city.name);
+    }));
   }
 }
 
