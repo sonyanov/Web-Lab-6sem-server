@@ -14,19 +14,19 @@ app.use('', favoritesRoute);
 async function start () {
   try {
   	await mongoose.connect(`${process.env.DB_CONNECT}`, {
-      useNewUrlParser: true,
-	  useFindAndModify: false,
-	  useUnifiedTopology: true
+  		useNewUrlParser: true,
+  		useFindAndModify: false,
+  		useUnifiedTopology: true
 	}, console.log("connent"))
 	app.listen(port, (err) => {
 	  if(err){
-	  	console.log("Server failed!");
-	  	return;
+	    console.log("Server failed!");
+	    return;
 	  }
 	  console.log("Server started");
 	})
   } catch (e) {
- 	console.log(e);
+    console.log(e);
   }
 }
 
