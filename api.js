@@ -32,7 +32,7 @@ class Api {
       description: data.weather[0].description,
       wind: `${data.wind.speed} m/s, ${this.convertDeg(data.wind.deg)}`,
       icon: data.weather[0].icon
-    }
+    };
   }
 
   async getResponseByCity(response) {

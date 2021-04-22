@@ -32,22 +32,19 @@ class Dao {
   }
 
   async create(response) {
-    var result = true
     if(await this.contain(response)){
-      result = false
-      return result
-    } 
-    else{
-      city.create({
-        name: response.name,
-        coord: {
-          latitude: response.coord.lat,
-          lontitude: response.coord.lon
-        }
-      })
-      return result
+      return false;
     }
+    city.create({
+      name: response.name,
+      coord: {
+        latitude: response.coord.lat,
+        lontitude: response.coord.lon
+      }
+    });
+    return true;
   }
+
 
   async remove(cityName) {
     await city.findOneAndRemove({name: cityName});

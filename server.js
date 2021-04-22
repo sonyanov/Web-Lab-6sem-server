@@ -11,23 +11,19 @@ app.use(cors());
 app.use('', weatherRoute);
 app.use('', favoritesRoute);
 
-async function start () {
-  try {
-  	await mongoose.connect(`${process.env.DB_CONNECT}`, {
-  	  useNewUrlParser: true,
-  	  useFindAndModify: false,
-  	  useUnifiedTopology: true
-	}, console.log("connent"))
-	app.listen(port, (err) => {
-	  if(err){
-	    console.log("Server failed!");
-	    return;
-	  }
-	  console.log("Server started");
-	})
-  } catch (e) {
-    console.log(e);
-  }
-}
+const server = app.listen(port, async(err, req, res, next) =>{
+  await mongoose.connect(`${process.env.DB_CONNECT}`, {
+    useNewUrlParser: true,
+  	useFindAndModify: false,
+  	useUnifiedTopology: true
+  }, console.log("connent"));
 
-start();
+  if (err) {
+    console.error(err.stack);
+    res.status(500).send("Server failed!");
+    return;
+  }
+
+  console.log("Server started");
+})
+
