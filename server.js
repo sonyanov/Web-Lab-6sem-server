@@ -10,6 +10,13 @@ const port = process.env.PORT || 3000;
 app.use(cors());
 app.use('', weatherRoute);
 app.use('', favoritesRoute);
+app.use((err, req, res, next) => {
+  if (res.headersSent) {
+    return next(err);
+  }
+  res.status(500);
+  res.render('error', { error: err });
+});
 
 const server = app.listen(port, async(err, req, res, next) =>{
   await mongoose.connect(`${process.env.DB_CONNECT}`, {
