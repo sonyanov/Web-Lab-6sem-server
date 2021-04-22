@@ -14,8 +14,8 @@ app.use('', favoritesRoute);
 const server = app.listen(port, async(err, req, res, next) =>{
   await mongoose.connect(`${process.env.DB_CONNECT}`, {
     useNewUrlParser: true,
-  	useFindAndModify: false,
-  	useUnifiedTopology: true
+    useFindAndModify: false,
+    useUnifiedTopology: true
   }, console.log("connent"));
 
   if (err) {
